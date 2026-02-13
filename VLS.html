@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinFlow - Smart Loan Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0A2540;
+            --accent: #00D4AA;
+            --accent-light: #5FFBDF;
+            --secondary: #FF6B6B;
+            --bg-light: #F7FAFC;
+            --bg-dark: #0F1419;
+            --text: #1A202C;
+            --text-light: #718096;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-alt: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-light);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-circle-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent);
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .bg-circle-2 {
+            width: 400px;
+            height: 400px;
+            background: #667eea;
+            bottom: -10%;
+            right: -10%;
+            animation-delay: 3s;
+        }
+
+        .bg-circle-3 {
+            width: 350px;
+            height: 350px;
+            background: var(--secondary);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(40px, 10px) scale(1.05); }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 212, 170, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 5% 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-content .highlight {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            padding: 0.75rem 2rem;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Loan Calculator */
+        .calculator-card {
+            background: white;
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+            border: 1px solid rgba(0, 212, 170, 0.1);
+        }
+
+        .calculator-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .input-wrapper input:focus,
+        .input-wrapper select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(0, 212, 170, 0.1);
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, var(--accent) 0%, var(--accent-light) 100%);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--accent);
+            transition: all 0.3s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .slider-value {
+            text-align: right;
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--primary), #1a3a5c);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            animation: scaleIn 0.4s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .result-card h3 {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-card .amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .result-detail {
+            text-align: center;
+        }
+
+        .result-detail .label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-detail .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white;
+            padding: 1.25rem;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3);
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 212, 170, 0.4);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 212, 170, 0.1);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* AI Assistant Section */
+        .ai-assistant {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--primary), #1a3a5c);
+            color: white;
+        }
+
+        .ai-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .ai-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .ai-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ai-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .ai-feature-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(10px);
+        }
+
+        .ai-feature-icon {
+            font-size: 1.5rem;
+        }
+
+        .chat-interface {
+            background: white;
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #E2E8F0;
+            margin-bottom: 1.5rem;
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .chat-info h4 {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .chat-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .chat-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .chat-message {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .chat-message.user {
+            align-items: flex-end;
+        }
+
+        .message-bubble {
+            background: #F7FAFC;
+            padding: 1rem 1.25rem;
+            border-radius: 20px;
+            max-width: 80%;
+            color: var(--text);
+        }
+
+        .chat-message.user .message-bubble {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input-wrapper input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 15px;
+            font-size: 1rem;
+        }
+
+        .chat-input-wrapper button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .chat-input-wrapper button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Loan Types */
+        .loan-types {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .loan-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .loan-type-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .loan-type-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(0, 212, 170, 0.15);
+        }
+
+        .loan-type-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .loan-type-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .loan-type-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .loan-rate {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .loan-rate-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 3rem 5%;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .ai-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="bg-circle bg-circle-1"></div>
+        <div class="bg-circle bg-circle-2"></div>
+        <div class="bg-circle bg-circle-3"></div>
+    </div>
+
+    <nav>
+        <div class="logo">FinFlow</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#loans">Loan Types</a></li>
+            <li><a href="#calculator">Calculator</a></li>
+            <li><a href="#ai-assistant">AI Assistant</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <button class="btn-primary">Apply Now</button>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Smart Loans for <span class="highlight">Bright Futures</span></h1>
+            <p>Experience the future of lending with AI-powered loan recommendations, instant approvals, and personalized financial guidance tailored to your dreams.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">Get Started</button>
+                <button class="btn-secondary">Learn More</button>
+            </div>
+        </div>
+
+        <div class="calculator-card" id="calculator">
+            <h2>AI Loan Calculator</h2>
+            
+            <div class="input-group">
+                <label>Loan Amount</label>
+                <div class="input-wrapper">
+                    <input type="range" class="slider" id="loanAmount" min="1000" max="1000000" value="50000" step="1000">
+                    <div class="slider-value" id="loanAmountValue">$50,000</div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Loan Duration (Years)</label>
+                <div class="input-wrapper">
+                    <input type="range" class="slider" id="loanDuration" min="1" max="30" value="5" step="1">
+                    <div class="slider-value" id="loanDurationValue">5 years</div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Loan Type</label>
+                <div class="input-wrapper">
+                    <select id="loanType">
+                        <option value="personal">Personal Loan</option>
+                        <option value="home">Home Loan</option>
+                        <option value="auto">Auto Loan</option>
+                        <option value="business">Business Loan</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateLoan()">Calculate with AI</button>
+
+            <div class="result-card" id="resultCard" style="display: none;">
+                <h3>Monthly Payment</h3>
+                <div class="amount" id="monthlyPayment">$0</div>
+                <div class="result-details">
+                    <div class="result-detail">
+                        <div class="label">Total Interest</div>
+                        <div class="value" id="totalInterest">$0</div>
+                    </div>
+                    <div class="result-detail">
+                        <div class="label">Total Amount</div>
+                        <div class="value" id="totalAmount">$0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="section-title">
+            <h2>Why Choose FinFlow?</h2>
+            <p>Industry-leading features powered by artificial intelligence</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI-Powered Matching</h3>
+                <p>Our advanced AI analyzes your financial profile to match you with the perfect loan products and rates.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Approval</h3>
+                <p>Get approved in minutes with our automated underwriting system. No waiting, no hassle.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Bank-Level Security</h3>
+                <p>Your data is protected with 256-bit encryption and multi-factor authentication.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Best Rates Guaranteed</h3>
+                <p>We shop 50+ lenders to find you the lowest rates. Save thousands over the life of your loan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="ai-assistant" id="ai-assistant">
+        <div class="ai-container">
+            <div class="ai-content">
+                <h2>Meet Your AI Financial Assistant</h2>
+                <p>Get personalized loan recommendations, financial advice, and 24/7 support from our intelligent chatbot.</p>
+                
+                <div class="ai-features">
+                    <div class="ai-feature-item">
+                        <div class="ai-feature-icon">💬</div>
+                        <div>
+                            <strong>Smart Conversations</strong>
+                            <p style="opacity: 0.8; margin-top: 0.25rem;">Natural language understanding for seamless interaction</p>
+                        </div>
+                    </div>
+                    <div class="ai-feature-item">
+                        <div class="ai-feature-icon">📊</div>
+                        <div>
+                            <strong>Financial Insights</strong>
+                            <p style="opacity: 0.8; margin-top: 0.25rem;">Real-time analysis of your borrowing capacity</p>
+                        </div>
+                    </div>
+                    <div class="ai-feature-item">
+                        <div class="ai-feature-icon">🎯</div>
+                        <div>
+                            <strong>Personalized Recommendations</strong>
+                            <p style="opacity: 0.8; margin-top: 0.25rem;">Tailored loan products based on your profile</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-interface">
+                <div class="chat-header">
+                    <div class="chat-avatar">🤖</div>
+                    <div class="chat-info">
+                        <h4>FinFlow AI Assistant</h4>
+                        <p>Online • Ready to help</p>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message">
+                        <div class="message-bubble">
+                            Hi! I'm your AI financial assistant. I can help you find the perfect loan. What type of loan are you looking for?
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-input-wrapper">
+                    <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="handleChatKeyPress(event)">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="loan-types" id="loans">
+        <div class="section-title">
+            <h2>Our Loan Products</h2>
+            <p>Flexible financing solutions for every need</p>
+        </div>
+
+        <div class="loan-types-grid">
+            <div class="loan-type-card">
+                <div class="loan-type-icon">🏠</div>
+                <h3>Home Loans</h3>
+                <p>Make your dream home a reality with competitive mortgage rates and flexible terms.</p>
+                <div class="loan-rate">3.2%</div>
+                <div class="loan-rate-label">Starting APR</div>
+            </div>
+
+            <div class="loan-type-card">
+                <div class="loan-type-icon">🚗</div>
+                <h3>Auto Loans</h3>
+                <p>Drive away in your dream car with our low-rate auto financing options.</p>
+                <div class="loan-rate">4.5%</div>
+                <div class="loan-rate-label">Starting APR</div>
+            </div>
+
+            <div class="loan-type-card">
+                <div class="loan-type-icon">👤</div>
+                <h3>Personal Loans</h3>
+                <p>Quick funding for any personal need, from debt consolidation to home improvements.</p>
+                <div class="loan-rate">5.9%</div>
+                <div class="loan-rate-label">Starting APR</div>
+            </div>
+
+            <div class="loan-type-card">
+                <div class="loan-type-icon">💼</div>
+                <h3>Business Loans</h3>
+                <p>Fuel your business growth with flexible financing and expert support.</p>
+                <div class="loan-rate">6.2%</div>
+                <div class="loan-rate-label">Starting APR</div>
+            </div>
+
+            <div class="loan-type-card">
+                <div class="loan-type-icon">🎓</div>
+                <h3>Education Loans</h3>
+                <p>Invest in your future with affordable student loan options and flexible repayment.</p>
+                <div class="loan-rate">3.8%</div>
+                <div class="loan-rate-label">Starting APR</div>
+            </div>
+
+            <div class="loan-type-card">
+                <div class="loan-type-icon">⚡</div>
+                <h3>Quick Loans</h3>
+                <p>Emergency funding when you need it most, with approval in under 24 hours.</p>
+                <div class="loan-rate">7.5%</div>
+                <div class="loan-rate-label">Starting APR</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>FinFlow</h3>
+                <p>Empowering financial freedom through intelligent lending solutions. Your trusted partner in achieving life's biggest goals.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Home Loans</a></li>
+                    <li><a href="#">Auto Loans</a></li>
+                    <li><a href="#">Personal Loans</a></li>
+                    <li><a href="#">Business Loans</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 FinFlow. All rights reserved. Built with AI-powered technology.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loan Calculator
+        const loanAmount = document.getElementById('loanAmount');
+        const loanDuration = document.getElementById('loanDuration');
+        const loanAmountValue = document.getElementById('loanAmountValue');
+        const loanDurationValue = document.getElementById('loanDurationValue');
+
+        loanAmount.addEventListener('input', function() {
+            loanAmountValue.textContent = '$' + parseInt(this.value).toLocaleString();
+        });
+
+        loanDuration.addEventListener('input', function() {
+            loanDurationValue.textContent = this.value + ' years';
+        });
+
+        function calculateLoan() {
+            const principal = parseInt(loanAmount.value);
+            const years = parseInt(loanDuration.value);
+            const loanType = document.getElementById('loanType').value;
+            
+            // Interest rates based on loan type
+            const rates = {
+                personal: 5.9,
+                home: 3.2,
+                auto: 4.5,
+                business: 6.2
+            };
+            
+            const annualRate = rates[loanType] || 5.9;
+            const monthlyRate = annualRate / 100 / 12;
+            const months = years * 12;
+            
+            // Calculate monthly payment using amortization formula
+            const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+            const totalAmount = monthlyPayment * months;
+            const totalInterest = totalAmount - principal;
+            
+            // Display results with animation
+            const resultCard = document.getElementById('resultCard');
+            resultCard.style.display = 'block';
+            
+            setTimeout(() => {
+                document.getElementById('monthlyPayment').textContent = '$' + Math.round(monthlyPayment).toLocaleString();
+                document.getElementById('totalInterest').textContent = '$' + Math.round(totalInterest).toLocaleString();
+                document.getElementById('totalAmount').textContent = '$' + Math.round(totalAmount).toLocaleString();
+            }, 100);
+        }
+
+        // AI Chat functionality
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+
+        const aiResponses = [
+            "Based on your profile, I recommend our Personal Loan with a 5.9% APR. Would you like to know more?",
+            "Great choice! Our AI has found 3 lenders offering competitive rates for you. The best rate is 4.2% APR.",
+            "I can help you with that! What's your estimated credit score?",
+            "Perfect! You're pre-qualified for up to $50,000. Would you like to proceed with the application?",
+            "I've analyzed your financial situation. You could save $2,400 annually by refinancing your current loan.",
+            "Let me calculate the best loan terms for you. One moment please...",
+            "Based on current market conditions, now is a great time to apply. Interest rates are favorable!"
+        ];
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message === '') return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'chat-message user';
+            userMessage.innerHTML = `<div class="message-bubble">${message}</div>`;
+            chatMessages.appendChild(userMessage);
+            
+            chatInput.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Simulate AI response
+            setTimeout(() => {
+                const aiMessage = document.createElement('div');
+                aiMessage.className = 'chat-message';
+                const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
+                aiMessage.innerHTML = `<div class="message-bubble">${randomResponse}</div>`;
+                chatMessages.appendChild(aiMessage);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation trigger
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .loan-type-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
